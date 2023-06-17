@@ -1,5 +1,5 @@
 // Your Script here.
-
+const lookup = {
   'A': 'N','B': 'O','C': 'P','D': 'Q',
   'E': 'R','F': 'S','G': 'T','H': 'U',
   'I': 'V','J': 'W','K': 'X','L': 'Y',
@@ -9,21 +9,18 @@
   'Y': 'L','Z': 'M', '?': '?', ',': ','
 };
 
-function rot13(encodedStr) {
-  var words = encodedStr.split(" "); // String to Array
-  let decodedArr = []; // Your Result goes here
-  // Only change code below this line
-  for (let i = 0; i < words.length; i++) { // itrat all the word & going decoded
-    const word = words[i];// for giving word string
-    let decoded_word = "";
-    for (let j = 0; j < word.length; j++) {
-      var char = word.charAt(j);
-      var decoded_char = lookup[char];
-      decoded_word += decoded_char;
-    }
-    decodedArr.push(decoded_word);
-  }
-  return decodedArr.join(" ");// join my all decoded word in my single data
+function rot13(encodedStr){
+const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+const rot13 = "NOPQRSTUVWXYZABCDEFGHIJKLMnoprestuvwxyzabcdefghijklm";
+	const regex = /[a-zA-Z]/g;
+	const decodedStr = encodedStr.replace(regex,(char)=>{
+		const index = rot13.indexOf(char);
+		if(index===-1){
+			return char;
+		}
+		return alphabet[index];
+	})
+  return decodedStr//return decodedArr
 }
 
 // You can test your code by running the above function and printing it to console by pressing the run button at the top. To run it with input 36, uncomment the following line
